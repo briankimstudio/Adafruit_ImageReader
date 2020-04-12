@@ -15,7 +15,7 @@
 #ifndef __ADAFRUIT_IMAGE_READER_H__
 #define __ADAFRUIT_IMAGE_READER_H__
 
-#include "Adafruit_SPIFlash.h"
+#include "SPIFFS.h"
 #include "Adafruit_SPITFT.h"
 
 /** Status codes returned by drawBMP() and loadBMP() */
@@ -94,7 +94,7 @@ protected:
 */
 class Adafruit_ImageReader {
 public:
-  Adafruit_ImageReader(FatFileSystem &fs);
+  Adafruit_ImageReader(fs::SPIFFSFS &fs);
   ~Adafruit_ImageReader(void);
   ImageReturnCode drawBMP(char *filename, Adafruit_SPITFT &tft, int16_t x,
                           int16_t y, boolean transact = true);
@@ -103,7 +103,7 @@ public:
   void printStatus(ImageReturnCode stat, Stream &stream = Serial);
 
 private:
-  FatFileSystem *filesys;
+  fs::SPIFFSFS *filesys;
   File file;
   ImageReturnCode coreBMP(char *filename, Adafruit_SPITFT *tft, uint16_t *dest,
                           int16_t x, int16_t y, Adafruit_Image *img,
