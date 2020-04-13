@@ -1,6 +1,8 @@
 # Display BMP file from SPIFFS on TFT display using ESP32
 
-This is a library for drawing BMP file from SPIFFS on TFT display. It is a modified version of https://github.com/adafruit/Adafruit_ImageReader. Just overwrite two files to exisiting library folder.
+This is a library for drawing BMP file from SPIFFS on TFT display. It is a modified version of https://github.com/adafruit/Adafruit_ImageReader.  
+
+If you have installed Adafruit_ImageReader library already, just overwrite two files to exisiting library folder.
 
 ```
 Adafruit_ImageReader.cpp
@@ -9,15 +11,17 @@ Adafruit_ImageReader.h
 
 # How to use
 
-After inlcuding header file, initialize SPIFFS. That's it.
+First of all, upload BMP file to SPIFFS using https://github.com/me-no-dev/arduino-esp32fs-plugin
 
-1. Include
+Then in your sketch, include header file, initialize SPIFFS. That's it.
+
+1. Include header file
 
 ```
   #include <Adafruit_ImageReader.h>
 ```
 
-2. Initialize
+2. Initialize SPIFFS
 
 ```
   if (!SPIFFS.begin(true)) {
@@ -26,7 +30,7 @@ After inlcuding header file, initialize SPIFFS. That's it.
   }
 ```  
 
-3. Load image and draw
+3. Load image and draw on display
 
 ```
   Adafruit_ST7735 display = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
@@ -35,6 +39,10 @@ After inlcuding header file, initialize SPIFFS. That's it.
   stat = reader.loadBMP("/cat.bmp", img);
   img.draw(display, 0, 0); 
 ```  
+
+Then, you will see something like this.
+
+![On ESP32](https://github.com/briankimstudio/Adafruit_ImageReader/blob/master/bmp_spiffs.jpg)
 I hope you enjoy it~
 
 Thanks,
